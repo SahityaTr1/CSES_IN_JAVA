@@ -1,0 +1,28 @@
+import java.util.*;
+public class DPQ2
+{
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        final int maxX = 1000000;
+        final int value = 0x3f3f3f3f; // the value which indicates infinity
+        int N = sc.nextInt();
+        int X = sc.nextInt();
+        int x;
+        int[] dp = new int[maxX + 1];
+        Arrays.fill(dp, 1, X + 1, value);
+        dp[0]=0;
+        for (int i = 0; i < N; i++)
+        {
+            x = sc.nextInt();
+            for (int j = 0; j <= X - x; j++)
+            {
+                if (dp[j] != value)
+                {
+                    dp[j + x] = Math.min(dp[j + x], dp[j] + 1);
+                }
+            }
+        }
+        System.out.println(dp[X] == value ? -1 : dp[X]);
+    }
+}
